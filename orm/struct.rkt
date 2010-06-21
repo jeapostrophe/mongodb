@@ -1,6 +1,6 @@
-#lang scheme
+#lang racket
 (require (for-syntax syntax/parse
-                     scheme/list
+                     racket/list
                      unstable/syntax)
          "dict.rkt")
 

@@ -1,5 +1,5 @@
-#lang scheme
-(require (prefix-in scheme: scheme)
+#lang racket
+(require (prefix-in racket: racket)
          "shared.rkt"
          "../lib/binio.rkt")
 
@@ -95,7 +95,7 @@
 
 (define (read-string p)
   (define amt+1 (read-int32 p))
-  (begin0 (scheme:read-string (sub1 amt+1) p)
+  (begin0 (racket:read-string (sub1 amt+1) p)
           (read-char p)))
 
 (define (read-cstring p)

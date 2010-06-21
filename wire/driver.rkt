@@ -1,4 +1,4 @@
-#lang scheme
+#lang racket
 (require unstable/contract
          "../lib/binio.rkt"
          "format.rkt")

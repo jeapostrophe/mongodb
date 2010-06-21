@@ -1,5 +1,5 @@
-#lang scheme
-(require scheme/runtime-path
+#lang racket
+(require racket/runtime-path
          (only-in mzlib/etc begin-with-definitions))
 
 (define-syntax-rule (with-mongod e ...)

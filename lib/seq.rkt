@@ -1,4 +1,4 @@
-#lang scheme
+#lang racket
 
 (define (sequence-ref s i)
   (define-values (more? get) (sequence-generate s))

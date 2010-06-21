@@ -1,4 +1,4 @@
-#lang scheme
+#lang racket
 (require "../lib/test.rkt"
          "main.rkt"
          tests/eli-tester)

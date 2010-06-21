@@ -1,11 +1,11 @@
-#lang scheme
+#lang racket
 (require "main.rkt"
          "../basic/main.rkt"
          "../bson/main.rkt"
          "../lib/test.rkt"
          "../lib/seq.rkt"
-         scheme/set
-         scheme/serialize
+         racket/set
+         racket/serialize
          tests/eli-tester)
 
 (test

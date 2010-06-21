@@ -1,4 +1,4 @@
-#lang scheme
+#lang racket
 (require "main.rkt"
          "../bson/main.rkt"
          "../lib/test.rkt"

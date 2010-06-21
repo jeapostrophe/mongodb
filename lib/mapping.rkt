@@ -1,4 +1,4 @@
-#lang scheme
+#lang racket
 
 
 (define-syntax-rule (define-mappings (lhs->rhs rhs->lhs)

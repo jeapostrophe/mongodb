@@ -1,4 +1,4 @@
-#lang scheme
+#lang racket
 (require srfi/19
          "../lib/mapping.rkt"
          "../lib/binio.rkt")

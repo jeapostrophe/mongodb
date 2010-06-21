@@ -2,13 +2,13 @@
 @(require (planet cce/scheme:6/planet)
           (planet cce/scheme:6/scribble)
           scribble/manual
-          (for-label scheme
+          (for-label racket
                      (only-in srfi/19
                               time? time-type time-utc)
                      "main.rkt"))
 
 @title{MongoDB}
-@author{@(author+email "Jay McCarthy" "jay@plt-scheme.org")}
+@author{@(author+email "Jay McCarthy" "jay@racket-lang.org")}
 
 @defmodule/this-package[]
 
@@ -20,7 +20,7 @@ This package provides an interface to @link["http://www.mongodb.org/"]{MongoDB}.
 
 Here's a little snippet that uses the API.
 
-@schemeblock[
+@racketblock[
  (define m (create-mongo))
  (define d (make-mongo-db m "awesome-dot-com"))
  (current-mongo-db d)
@@ -51,24 +51,24 @@ A @deftech{BSON document} is a dictionary that maps symbols to @tech{BSON values
 
 A @deftech{BSON value} is either
 @itemlist[
- @item{ An @scheme[inexact?] @scheme[real?] number }
- @item{ A @scheme[string?] }
+ @item{ An @racket[inexact?] @racket[real?] number }
+ @item{ A @racket[string?] }
  @item{ A @tech{BSON document} }
  @item{ A @tech{BSON sequence} }
- @item{ A @scheme[bson-binary?] or @scheme[bytes?]}
- @item{ A @scheme[bson-objectid?] }
- @item{ A @scheme[boolean?] }
- @item{ A SRFI 19 @scheme[time?] where @scheme[time-type] equals @scheme[time-utc] }
- @item{ A @scheme[bson-null?] }
- @item{ A @scheme[bson-regexp?] }
- @item{ A @scheme[bson-javascript?] }
- @item{ A @scheme[symbol?] }
- @item{ A @scheme[bson-javascript/scope?] }
- @item{ A @scheme[int32?] }
- @item{ A @scheme[bson-timestamp?] }
- @item{ A @scheme[int64?] }
- @item{ @scheme[bson-min-key] }
- @item{ @scheme[bson-max-key] }
+ @item{ A @racket[bson-binary?] or @racket[bytes?]}
+ @item{ A @racket[bson-objectid?] }
+ @item{ A @racket[boolean?] }
+ @item{ A SRFI 19 @racket[time?] where @racket[time-type] equals @racket[time-utc] }
+ @item{ A @racket[bson-null?] }
+ @item{ A @racket[bson-regexp?] }
+ @item{ A @racket[bson-javascript?] }
+ @item{ A @racket[symbol?] }
+ @item{ A @racket[bson-javascript/scope?] }
+ @item{ A @racket[int32?] }
+ @item{ A @racket[bson-timestamp?] }
+ @item{ A @racket[int64?] }
+ @item{ @racket[bson-min-key] }
+ @item{ @racket[bson-max-key] }
 ]
 
 A @deftech{BSON sequence} is sequence of @tech{BSON values}.
@@ -80,11 +80,11 @@ A @deftech{BSON sequence} is sequence of @tech{BSON values}.
 
 A few BSON types do not have equivalents in Scheme.
 
-@defproc[(bson-min-key? [x any/c]) boolean?]{ A test for @scheme[bson-min-key]. }
+@defproc[(bson-min-key? [x any/c]) boolean?]{ A test for @racket[bson-min-key]. }
 @defthing[bson-min-key bson-min-key?]{ The smallest BSON value. }
-@defproc[(bson-max-key? [x any/c]) boolean?]{ A test for @scheme[bson-max-key]. }
+@defproc[(bson-max-key? [x any/c]) boolean?]{ A test for @racket[bson-max-key]. }
 @defthing[bson-max-key bson-max-key?]{ The largest BSON value. }
-@defproc[(bson-null? [x any/c]) boolean?]{ A test for @scheme[bson-null]. }
+@defproc[(bson-null? [x any/c]) boolean?]{ A test for @racket[bson-null]. }
 @defthing[bson-null bson-null?]{ The missing BSON value. }
 @defstruct[bson-timestamp ([value int64?])]{ A value representing an internal MongoDB type. }
 @defproc[(bson-objectid? [x any/c]) boolean?]{ A test for BSON @link["http://www.mongodb.org/display/DOCS/Object+IDs"]{ObjectId}s, an internal MongoDB type. }
@@ -100,11 +100,11 @@ A few BSON types have equivalents in Scheme, but because of additional tagging o
 
 @subsection{Decoding Conventions}
 
-Only @scheme[make-hasheq] dictionaries are returned as @tech{BSON documents}.
+Only @racket[make-hasheq] dictionaries are returned as @tech{BSON documents}.
 
-A @scheme[bson-binary?] where @scheme[bson-binary-type] is equal to @scheme['binary] is never returned. It is converted to @scheme[bytes?].
+A @racket[bson-binary?] where @racket[bson-binary-type] is equal to @racket['binary] is never returned. It is converted to @racket[bytes?].
 
-Only @scheme[vector] sequences are returned as @tech{BSON sequences}.
+Only @racket[vector] sequences are returned as @tech{BSON sequences}.
 
 @section{Basic Operations}
 
@@ -138,7 +138,7 @@ The basic API of MongoDB is provided by this module.
 
 @defproc[(mongo-db-execute-command! [db mongo-db?] [cmd bson-document/c])
          bson-document/c]{
- Executes command @scheme[cmd] on the database @scheme[db] and returns Mongo's response. Refer to @link["http://www.mongodb.org/display/DOCS/List+of+Database+Commands"]{List of Database Commands} for more details.
+ Executes command @racket[cmd] on the database @racket[db] and returns Mongo's response. Refer to @link["http://www.mongodb.org/display/DOCS/List+of+Database+Commands"]{List of Database Commands} for more details.
 }
                          
 @defproc[(mongo-db-collections [db mongo-db?])
@@ -166,20 +166,20 @@ The basic API of MongoDB is provided by this module.
  Drops a database from its server.
  }
                        
-@defthing[mongo-db-profiling/c contract?]{ Defined as @scheme[(symbols 'none 'low 'all)]. }
+@defthing[mongo-db-profiling/c contract?]{ Defined as @racket[(symbols 'none 'low 'all)]. }
 @defproc[(mongo-db-profiling [db mongo-db?]) mongo-db-profiling/c]{ Returns the profiling level of the database. }
-@defproc[(set-mongo-db-profiling! [db mongo-db?] [v mongo-db-profiling/c]) boolean?]{ Sets the profiling level of the database. Returns @scheme[#t] on success. }
+@defproc[(set-mongo-db-profiling! [db mongo-db?] [v mongo-db-profiling/c]) boolean?]{ Sets the profiling level of the database. Returns @racket[#t] on success. }
 
 @defproc[(mongo-db-profiling-info [db mongo-db?]) bson-document/c]{ Returns the profiling information from the database. Refer to @link["http://www.mongodb.org/display/DOCS/Database+Profiler"]{Database Profiler} for more details. }
 
-@defproc[(mongo-db-valid-collection? [db mongo-db?] [name string?]) boolean?]{ Returns @scheme[#t] if @scheme[name] is a valid collection. }
+@defproc[(mongo-db-valid-collection? [db mongo-db?] [name string?]) boolean?]{ Returns @racket[#t] if @racket[name] is a valid collection. }
                           
 @subsection{Collections}
 
 @defstruct[mongo-collection ([db mongo-db?] [name string?])]{ A structure representing a Mongo collection. }
 
 @defproc[(mongo-collection-drop! [mc mongo-collection?]) void]{ Drops the collection from its database. }
-@defproc[(mongo-collection-valid? [mc mongo-collection?]) boolean?]{ Returns @scheme[#t] if @scheme[mc] is a valid collection. }
+@defproc[(mongo-collection-valid? [mc mongo-collection?]) boolean?]{ Returns @racket[#t] if @racket[mc] is a valid collection. }
 @defproc[(mongo-collection-full-name [mc mongo-collection?]) string?]{ Returns the full name of the collection. }
 @defproc[(mongo-collection-find [mc mongo-collection?]
                                 [query bson-document/c]
@@ -192,7 +192,7 @@ The basic API of MongoDB is provided by this module.
          mongo-cursor?]{
  Performs a query in the collection. Refer to @link["http://www.mongodb.org/display/DOCS/Querying"]{Querying} for more details.
  
- If @scheme[limit] is @scheme[#f], then a limit of @scheme[2] is sent. This is the smallest limit that creates a server-side cursor, because @scheme[1] is interpreted as @scheme[-1].
+ If @racket[limit] is @racket[#f], then a limit of @racket[2] is sent. This is the smallest limit that creates a server-side cursor, because @racket[1] is interpreted as @racket[-1].
  }
 
 @defproc[(mongo-collection-insert-docs! [mc mongo-collection?] [docs (sequenceof bson-document/c)]) void]{ Inserts a sequence of documents into the collection. }
@@ -202,10 +202,10 @@ The basic API of MongoDB is provided by this module.
 @defproc[(mongo-collection-remove! [mc mongo-collection?] [sel bson-document/c]) void]{ Removes documents matching the selector. Refer to @link[
 "http://www.mongodb.org/display/DOCS/Removing"]{Removing} for more details. }
 
-@defproc[(mongo-collection-modify! [mc mongo-collection?] [sel bson-document/c] [mod bson-document/c]) void]{ Modifies all documents matching the selector according to @scheme[mod]. Refer to @link[
+@defproc[(mongo-collection-modify! [mc mongo-collection?] [sel bson-document/c] [mod bson-document/c]) void]{ Modifies all documents matching the selector according to @racket[mod]. Refer to @link[
 "http://www.mongodb.org/display/DOCS/Updating#Updating-ModifierOperations"]{Modifier Operations} for more details. }
 
-@defproc[(mongo-collection-replace! [mc mongo-collection?] [sel bson-document/c] [doc bson-document/c]) void]{ Replaces the first document matching the selector with @scheme[obj]. }
+@defproc[(mongo-collection-replace! [mc mongo-collection?] [sel bson-document/c] [doc bson-document/c]) void]{ Replaces the first document matching the selector with @racket[obj]. }
 
 @defproc[(mongo-collection-repsert! [mc mongo-collection?] [sel bson-document/c] [doc bson-document/c]) void]{ If a document matches the selector, it is replaced; otherwise the document is inserted. Refer to @link[
 "http://www.mongodb.org/display/DOCS/Updating#Updating-UpsertswithModifiers"]{Upserts with Modifiers} for more details on using modifiers. }
@@ -227,7 +227,7 @@ Query results are returned as @tech{Mongo cursors}.
 A @deftech{Mongo cursor} is a sequence of @tech{BSON documents}.
 
 @defproc[(mongo-cursor? [x any/c]) boolean?]{ A test for @tech{Mongo cursors}. }
-@defproc[(mongo-cursor-done? [mc mongo-cursor?]) boolean?]{ Returns @scheme[#t] if the cursor has no more answers. @scheme[#f] otherwise. }
+@defproc[(mongo-cursor-done? [mc mongo-cursor?]) boolean?]{ Returns @racket[#t] if the cursor has no more answers. @racket[#f] otherwise. }
 @defproc[(mongo-cursor-kill! [mc mongo-cursor?]) void]{ Frees the server resources for the cursor. }
 
 @section{ORM Operations}
@@ -242,18 +242,18 @@ An "ORM" style API is built on the basic Mongo operations.
 
 A @deftech{Mongo dictionary} is a dictionary backed by Mongo.
 
-@defproc[(create-mongo-dict [col string?]) mongo-dict?]{ Creates a new @tech{Mongo dictionary} in the @scheme[col] collection of the @scheme[(current-mongo-db)] database. }
+@defproc[(create-mongo-dict [col string?]) mongo-dict?]{ Creates a new @tech{Mongo dictionary} in the @racket[col] collection of the @racket[(current-mongo-db)] database. }
 
 @defproc[(mongo-dict-query [col string?] [query bson-document/c]) (sequenceof mongo-dict?)]{ Queries the collection and returns @tech{Mongo dictionaries}. }
 
 @defproc[(mongo-dict? [x any/c]) boolean?]{ A test for @tech{Mongo dictionaries}. }
 @defparam[current-mongo-db db (or/c false/c mongo-db?)]{ The database used in @tech{Mongo dictionary} operations. }
-@defproc[(mongo-dict-ref [md mongo-dict?] [key symbol?] [fail any/c bson-null]) any/c]{ Like @scheme[dict-ref] but for @tech{Mongo dictionaries}, returns @scheme[bson-null] by default on errors or missing values. }
-@defproc[(mongo-dict-set! [md mongo-dict?] [key symbol?] [val any/c]) void]{ Like @scheme[dict-set!] but for @tech{Mongo dictionaries}. }
-@defproc[(mongo-dict-remove! [md mongo-dict?] [key symbol?]) void]{ Like @scheme[dict-remove!] but for @tech{Mongo dictionaries}. }
-@defproc[(mongo-dict-count [md mongo-dict?]) exact-nonnegative-integer?]{ Like @scheme[dict-count] but for @tech{Mongo dictionaries}. }
+@defproc[(mongo-dict-ref [md mongo-dict?] [key symbol?] [fail any/c bson-null]) any/c]{ Like @racket[dict-ref] but for @tech{Mongo dictionaries}, returns @racket[bson-null] by default on errors or missing values. }
+@defproc[(mongo-dict-set! [md mongo-dict?] [key symbol?] [val any/c]) void]{ Like @racket[dict-set!] but for @tech{Mongo dictionaries}. }
+@defproc[(mongo-dict-remove! [md mongo-dict?] [key symbol?]) void]{ Like @racket[dict-remove!] but for @tech{Mongo dictionaries}. }
+@defproc[(mongo-dict-count [md mongo-dict?]) exact-nonnegative-integer?]{ Like @racket[dict-count] but for @tech{Mongo dictionaries}. }
 
-@defproc[(mongo-dict-inc! [md mongo-dict?] [key symbol?] [amt number? 1]) void]{ Increments @scheme[key]'s value by @scheme[amt] atomically. }
+@defproc[(mongo-dict-inc! [md mongo-dict?] [key symbol?] [amt number? 1]) void]{ Increments @racket[key]'s value by @racket[amt] atomically. }
 @defproc[(mongo-dict-push! [md mongo-dict?] [key symbol?] [val any/c]) void]{ Pushes a value onto the sequence atomically. }
 @defproc[(mongo-dict-append! [md mongo-dict?] [key symbol?] [vals sequence?]) void]{ Pushes a sequence of values onto the sequence atomically. }
 @defproc[(mongo-dict-set-add! [md mongo-dict?] [key symbol?] [val any/c]) void]{ Adds a value to the sequence if it is not present atomically. }
@@ -267,7 +267,7 @@ A @deftech{Mongo dictionary} is a dictionary backed by Mongo.
 
 @defmodule/this-package[orm/struct]
 
-@scheme[define-mongo-struct] is a macro to create some convenience functions for @tech{Mongo dictionaries}.
+@racket[define-mongo-struct] is a macro to create some convenience functions for @tech{Mongo dictionaries}.
 
 @defform/subs[(define-mongo-struct struct collection
                 ([field opt ...]
@@ -277,35 +277,35 @@ A @deftech{Mongo dictionary} is a dictionary backed by Mongo.
               #:contracts ([struct identifier?]
                            [collection string?]
                            [field identifier?])]{
- Defines @scheme[make-struct] and a set of operations for the fields.
+ Defines @racket[make-struct] and a set of operations for the fields.
          
- Every field implicitly has the @scheme[#:ref] option. Every mutable field implicitly has the @scheme[#:set!] option. Every immutable field implicitly has the @scheme[#:required] option. It is an error for an immutable field to have any options other than @scheme[#:required] and @scheme[#:ref], which are both implicit.
+ Every field implicitly has the @racket[#:ref] option. Every mutable field implicitly has the @racket[#:set!] option. Every immutable field implicitly has the @racket[#:required] option. It is an error for an immutable field to have any options other than @racket[#:required] and @racket[#:ref], which are both implicit.
  
- @scheme[make-struct] takes one keyword argument per field. If the field does not have the @scheme[#:required] option, the argument is optional and the instance will not contain a value for the field. @scheme[make-struct] returns a @scheme[mongo-dict?].
+ @racket[make-struct] takes one keyword argument per field. If the field does not have the @racket[#:required] option, the argument is optional and the instance will not contain a value for the field. @racket[make-struct] returns a @racket[mongo-dict?].
  
- If a field has the @scheme[#:ref] option, then @scheme[struct-field] is defined. It is implemented with @scheme[mongo-dict-ref].
+ If a field has the @racket[#:ref] option, then @racket[struct-field] is defined. It is implemented with @racket[mongo-dict-ref].
  
- If a field has the @scheme[#:set] option, then @scheme[set-struct-field!] is defined. It is implemented with @scheme[mongo-dict-set!].
+ If a field has the @racket[#:set] option, then @racket[set-struct-field!] is defined. It is implemented with @racket[mongo-dict-set!].
  
- If a field has the @scheme[#:inc] option, then @scheme[inc-struct-field!] is defined. It is implemented with @scheme[mongo-dict-inc!].
+ If a field has the @racket[#:inc] option, then @racket[inc-struct-field!] is defined. It is implemented with @racket[mongo-dict-inc!].
  
- If a field has the @scheme[#:null] option, then @scheme[null-struct-field!] is defined. It is implemented with @scheme[mongo-dict-remove!].
+ If a field has the @racket[#:null] option, then @racket[null-struct-field!] is defined. It is implemented with @racket[mongo-dict-remove!].
  
- If a field has the @scheme[#:push] option, then @scheme[push-struct-field!] is defined. It is implemented with @scheme[mongo-dict-push!].
+ If a field has the @racket[#:push] option, then @racket[push-struct-field!] is defined. It is implemented with @racket[mongo-dict-push!].
  
- If a field has the @scheme[#:append] option, then @scheme[append-struct-field!] is defined. It is implemented with @scheme[mongo-dict-append!].
+ If a field has the @racket[#:append] option, then @racket[append-struct-field!] is defined. It is implemented with @racket[mongo-dict-append!].
  
- If a field has the @scheme[#:set-add] option, then @scheme[set-add-struct-field!] is defined. It is implemented with @scheme[mongo-dict-set-add!].
+ If a field has the @racket[#:set-add] option, then @racket[set-add-struct-field!] is defined. It is implemented with @racket[mongo-dict-set-add!].
  
- If a field has the @scheme[#:set-add*] option, then @scheme[set-add*-struct-field!] is defined. It is implemented with @scheme[mongo-dict-set-add*!].
+ If a field has the @racket[#:set-add*] option, then @racket[set-add*-struct-field!] is defined. It is implemented with @racket[mongo-dict-set-add*!].
  
- If a field has the @scheme[#:pop] option, then @scheme[pop-struct-field!] is defined. It is implemented with @scheme[mongo-dict-pop!].
+ If a field has the @racket[#:pop] option, then @racket[pop-struct-field!] is defined. It is implemented with @racket[mongo-dict-pop!].
  
- If a field has the @scheme[#:shift] option, then @scheme[shift-struct-field!] is defined. It is implemented with @scheme[mongo-dict-shift!].
+ If a field has the @racket[#:shift] option, then @racket[shift-struct-field!] is defined. It is implemented with @racket[mongo-dict-shift!].
  
- If a field has the @scheme[#:pull] option, then @scheme[pull-struct-field!] is defined. It is implemented with @scheme[mongo-dict-pull!].
+ If a field has the @racket[#:pull] option, then @racket[pull-struct-field!] is defined. It is implemented with @racket[mongo-dict-pull!].
  
- If a field has the @scheme[#:pull*] option, then @scheme[pull*-struct-field!] is defined. It is implemented with @scheme[mongo-dict-pull*!].
+ If a field has the @racket[#:pull*] option, then @racket[pull*-struct-field!] is defined. It is implemented with @racket[mongo-dict-pull*!].
  
 }
 
@@ -320,7 +320,7 @@ A @deftech{Mongo dictionary} is a dictionary backed by Mongo.
 This module requires at least revision 18724 (committed on April 2nd, 2010) of PLT Scheme.
 
 @defform[(mongo-dict-arg col) #:contracts ([col string?])]{
-A bi-directional match expander for @schememodname[web-server/dispatch] that serializes to and from @tech{Mongo dictionaries} from the @scheme[col] collection.
+A bi-directional match expander for @racketmodname[web-server/dispatch] that serializes to and from @tech{Mongo dictionaries} from the @racket[col] collection.
 }
 
                                                                                                 
