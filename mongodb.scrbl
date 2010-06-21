@@ -23,6 +23,7 @@ Here's a little snippet that uses the API.
 @schemeblock[
  (define m (create-mongo))
  (define d (make-mongo-db m "awesome-dot-com"))
+ (current-mongo-db d)
  (define-mongo-struct post "posts"
    ([title #:required]
     [body #:required]
