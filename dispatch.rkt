@@ -1,6 +1,6 @@
 #lang scheme
 (require web-server/dispatch/extend
-         "main.ss")
+         "main.rkt")
 
 (define-match-expander mongo-dict/string
   (syntax-rules ()

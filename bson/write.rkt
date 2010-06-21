@@ -1,6 +1,6 @@
 #lang scheme
-(require "shared.ss"
-         "../lib/binio.ss")
+(require "shared.rkt"
+         "../lib/binio.rkt")
 
 (provide write-bson write-bson/bytes prepare-document)
 

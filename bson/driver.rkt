@@ -1,7 +1,7 @@
 #lang scheme
-(require "read.ss"
-         "write.ss"
-         "main.ss")
+(require "read.rkt"
+         "write.rkt"
+         "main.rkt")
 
 (provide/contract
  [read-bson (input-port? . -> . bson-document/c)]

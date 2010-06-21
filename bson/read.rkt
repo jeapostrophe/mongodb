@@ -1,7 +1,7 @@
 #lang scheme
 (require (prefix-in scheme: scheme)
-         "shared.ss"
-         "../lib/binio.ss")
+         "shared.rkt"
+         "../lib/binio.rkt")
 
 (provide read-bson read-bson/bytes)
 

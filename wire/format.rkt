@@ -1,9 +1,9 @@
 #lang scheme
-(require "../bson/main.ss"
-         "../bson/driver.ss"
-         "../lib/binio.ss"
-         "../lib/seq.ss"
-         "../lib/mapping.ss")
+(require "../bson/main.rkt"
+         "../bson/driver.rkt"
+         "../lib/binio.rkt"
+         "../lib/seq.rkt"
+         "../lib/mapping.rkt")
 
 ;;; Structs
 (define-struct msg (id response-to) #:transparent)

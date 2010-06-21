@@ -1,6 +1,6 @@
 #lang scheme
-(require "shared.ss"
-         "../lib/binio.ss")
+(require "shared.rkt"
+         "../lib/binio.rkt")
 
 (define bson-document/c
   bson-dict?)

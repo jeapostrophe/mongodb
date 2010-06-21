@@ -1,8 +1,8 @@
 #lang scheme
 (require scheme/serialize
-         "../bson/main.ss"
-         "../lib/seq.ss"
-         "../basic/main.ss")
+         "../bson/main.rkt"
+         "../lib/seq.rkt"
+         "../basic/main.rkt")
 
 (define current-mongo-db (make-parameter #f))
 

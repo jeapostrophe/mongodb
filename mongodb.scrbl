@@ -5,7 +5,7 @@
           (for-label scheme
                      (only-in srfi/19
                               time? time-type time-utc)
-                     "main.ss"))
+                     "main.rkt"))
 
 @title{MongoDB}
 @author{@(author+email "Jay McCarthy" "jay@plt-scheme.org")}
@@ -313,7 +313,7 @@ A @deftech{Mongo dictionary} is a dictionary backed by Mongo.
 
 @subsection{Dispatch Rules}
 
-@(require (for-label "dispatch.ss"))
+@(require (for-label "dispatch.rkt"))
 
 @defmodule/this-package[dispatch]
 

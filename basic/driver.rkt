@@ -1,11 +1,11 @@
 #lang scheme
 (require unstable/contract
-         "../wire/main.ss"
-         "../bson/driver.ss"
-         "../bson/main.ss"
-         "../lib/binio.ss"
-         "../lib/seq.ss"
-         "../lib/mapping.ss")
+         "../wire/main.rkt"
+         "../bson/driver.rkt"
+         "../bson/main.rkt"
+         "../lib/binio.rkt"
+         "../lib/seq.rkt"
+         "../lib/mapping.rkt")
 
 ;;; Structs
 

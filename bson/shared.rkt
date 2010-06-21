@@ -1,7 +1,7 @@
 #lang scheme
 (require srfi/19
-         "../lib/mapping.ss"
-         "../lib/binio.ss")
+         "../lib/mapping.rkt"
+         "../lib/binio.rkt")
 
 (define (not-represented x) #f)
 (define (deprecated x) #f)

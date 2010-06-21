@@ -2,7 +2,7 @@
 (require (for-syntax syntax/parse
                      scheme/list
                      unstable/syntax)
-         "dict.ss")
+         "dict.rkt")
 
 (define-syntax (define-mongo-struct stx)
   (syntax-parse 

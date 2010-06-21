@@ -1,6 +1,6 @@
 #lang scheme
-(require "../lib/test.ss"
-         "main.ss"
+(require "../lib/test.rkt"
+         "main.rkt"
          tests/eli-tester)
 
 (define ELEMENTS 100)

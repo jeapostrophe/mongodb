@@ -1,7 +1,7 @@
 #lang scheme
 (require unstable/contract
-         "../lib/binio.ss"
-         "format.ss")
+         "../lib/binio.rkt"
+         "format.rkt")
 
 (define-struct mongo-connection (input output))
 

@@ -1,9 +1,9 @@
 #lang scheme
-(require "main.ss"
-         "../basic/main.ss"
-         "../bson/main.ss"
-         "../lib/test.ss"
-         "../lib/seq.ss"
+(require "main.rkt"
+         "../basic/main.rkt"
+         "../bson/main.rkt"
+         "../lib/test.rkt"
+         "../lib/seq.rkt"
          scheme/set
          scheme/serialize
          tests/eli-tester)

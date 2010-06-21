@@ -1,6 +1,6 @@
 #lang scheme
-(require "main.ss"
-         "lib/test.ss")
+(require "main.rkt"
+         "lib/test.rkt")
 
 (with-mongod
     (define m (create-mongo))

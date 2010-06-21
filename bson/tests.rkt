@@ -1,7 +1,7 @@
 #lang scheme
-(require "read.ss"
-         "write.ss"
-         "shared.ss"
+(require "read.rkt"
+         "write.rkt"
+         "shared.rkt"
          srfi/19
          tests/eli-tester)
 

@@ -1,8 +1,8 @@
 #lang scheme
-(require "main.ss"
-         "../bson/main.ss"
-         "../lib/test.ss"
-         "../lib/seq.ss"
+(require "main.rkt"
+         "../bson/main.rkt"
+         "../lib/test.rkt"
+         "../lib/seq.rkt"
          tests/eli-tester)
 
 (test

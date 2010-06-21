@@ -7,11 +7,11 @@
 (define blurb
   (list "A native Scheme interface to MongoDB"))
 (define scribblings '(("mongodb.scrbl" (multi-page))))
-(define primary-file "main.ss")
+(define primary-file "main.rkt")
 (define categories '(net io))
 (define compile-omit-paths
-  (list "tests.ss"
-        "basic/tests.ss"
-        "bson/tests.ss"
-        "orm/tests.ss"
-        "wire/tests.ss"))
+  (list "tests.rkt"
+        "basic/tests.rkt"
+        "bson/tests.rkt"
+        "orm/tests.rkt"
+        "wire/tests.rkt"))
