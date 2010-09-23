@@ -1,6 +1,5 @@
 #lang scribble/doc
-@(require (planet cce/scheme:6/planet)
-          (planet cce/scheme:6/scribble)
+@(require unstable/scribble
           scribble/manual
           (for-label racket
                      (only-in srfi/19
