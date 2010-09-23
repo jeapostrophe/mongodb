@@ -95,7 +95,7 @@
 
 (define (read-string p)
   (define amt+1 (read-int32 p))
-  (begin0 (racket:read-string (sub1 amt+1) p)
+  (begin0 (bytes->string/utf-8 (racket:read-bytes (sub1 amt+1) p))
           (read-char p)))
 
 (define (read-cstring p)

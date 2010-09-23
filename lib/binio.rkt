@@ -23,7 +23,7 @@
        (< (* -1 9223372036854775808) x +9223372036854775807)))
 
 (define (prepare-cstring s)
-  (values (add1 (string-length s))
+  (values (add1 (string-utf-8-length s))
           (lambda (p)
             (write-string s p)
             (write-null-byte p))))

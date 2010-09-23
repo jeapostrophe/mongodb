@@ -73,4 +73,6 @@
  (id-test (make-hasheq (list (cons 'min-key bson-min-key))))
  (id-test (make-hasheq (list (cons 'max-key bson-max-key))))
  
+ (id-test (make-hasheq (list (cons 'utf8 (bytes->string/utf-8 (bytes 195 167 195 176 195 182 194 163))))))
+ 
  )

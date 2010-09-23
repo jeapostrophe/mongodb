@@ -1,8 +1,7 @@
 #lang setup/infotab
 (define name "MongoDB")
 (define release-notes
-  (list '(ul (li "Fixing quick-start example")
-             (li "Rackety"))))
+  (list '(ul (li "Fixing UTF-8 encoding"))))
 (define repositories
   (list "4.x"))
 (define blurb
