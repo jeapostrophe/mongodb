@@ -120,6 +120,10 @@ The basic API of MongoDB is provided by this module.
          mongo?]{
  Creates a connection to the specified Mongo server.
  }
+                
+@defproc[(close-mongo! [m mongo?]) void?]{
+ Closes the connection to the Mongo server.
+}
 
 @defproc[(mongo-list-databases [m mongo?])
          (vectorof bson-document/c)]{
@@ -133,7 +137,7 @@ The basic API of MongoDB is provided by this module.
          
 @subsection{Databases}
 
-@defstruct[mongo-db ([mongo mongo?] [name string?])]{ A structure representing a Mongo database. }
+@defstruct[mongo-db ([mongo mongo?] [name string?])]{ A structure representing a Mongo database. The @racket[mongo] field in mutable. }
 
 @defproc[(mongo-db-execute-command! [db mongo-db?] [cmd bson-document/c])
          bson-document/c]{

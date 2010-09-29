@@ -10,7 +10,7 @@
 ;;; Structs
 
 (define-struct mongo (lock conn))
-(define-struct mongo-db (mongo name))
+(define-struct mongo-db ([mongo #:mutable] name))
 (define-struct mongo-collection (db name))
 (provide/contract
  [mongo? (any/c . -> . boolean?)]
@@ -101,9 +101,17 @@
      (send-message conn msg))))
 
 (provide/contract
- [create-mongo (() (#:host string? #:port port-number?) . ->* . mongo?)])
+ [create-mongo (() (#:host string? #:port port-number?) . ->* . mongo?)]
+ [close-mongo! (mongo? . -> . void?)])
 (define (create-mongo #:host [host "localhost"] #:port [port 27017])
   (make-mongo (make-semaphore 1) (create-mongo-connection #:host host #:port port)))
+
+(define (close-mongo! m)
+  (match-define (struct mongo (lock conn)) m)
+  (call-with-semaphore 
+   lock
+   (lambda ()
+     (close-mongo-connection! conn))))
 
 (define (mongo-find m c q
                     #:tailable? [tailable? #f]
