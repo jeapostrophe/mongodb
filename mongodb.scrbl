@@ -137,7 +137,7 @@ The basic API of MongoDB is provided by this module.
          
 @subsection{Databases}
 
-@defstruct[mongo-db ([mongo mongo?] [name string?])]{ A structure representing a Mongo database. The @racket[mongo] field in mutable. }
+@defstruct[mongo-db ([mongo mongo?] [name string?])]{ A structure representing a Mongo database. The @racket[mongo] field is mutable. }
 
 @defproc[(mongo-db-execute-command! [db mongo-db?] [cmd bson-document/c])
          bson-document/c]{
