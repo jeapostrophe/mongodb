@@ -14,6 +14,13 @@
     =>
     (list "admin" "local"))
    
+   ;; added test for mongo-list-databases: 2011-01-20, JBC
+   (test
+    (for/list ([d (in-vector (mongo-list-databases m))])
+      (hash-ref d 'name))
+    =>
+    (list "admin" "local"))
+   
    (define d (make-mongo-db m "test"))
    
    (test

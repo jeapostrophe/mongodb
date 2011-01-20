@@ -152,10 +152,11 @@
  [mongo-db-names (mongo? . -> . (listof string?))])
 
 (define (mongo-list-databases m)
-  (mongo-db-execute-command! (make-mongo-db m "admin") `([listDatabases . 1])))
+  (hash-ref (mongo-db-execute-command! (make-mongo-db m "admin") `([listDatabases . 1]))
+            'databases))
 
 (define (mongo-db-names m)
-  (for/list ([d (in-vector (hash-ref (mongo-list-databases m) 'databases))])
+  (for/list ([d (in-vector (mongo-list-databases m))])
     (hash-ref d 'name)))
 
 ;;; Database operations
