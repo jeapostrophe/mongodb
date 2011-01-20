@@ -1,0 +1,4 @@
+# ignore compiled subdirs
+compiled/
+# ignore doc subdir
+/doc/
