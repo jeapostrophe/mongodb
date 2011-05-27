@@ -17,10 +17,10 @@
 
 (define (int32? x)
   (and (integer? x)
-       (< (* -1 32768) x +32767)))
+       (<= (* -1 32768) x +32767)))
 (define (int64? x)
   (and (integer? x)
-       (< (* -1 9223372036854775808) x +9223372036854775807)))
+       (<= (* -1 9223372036854775808) x +9223372036854775807)))
 
 (define (prepare-cstring s)
   (values (add1 (string-utf-8-length s))
