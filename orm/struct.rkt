@@ -1,7 +1,8 @@
 #lang racket
 (require (for-syntax syntax/parse
                      racket/list
-                     unstable/syntax)
+                     unstable/syntax
+                     racket/syntax)
          "dict.rkt")
 
 (define-syntax (define-mongo-struct stx)

@@ -1,5 +1,5 @@
 #lang scribble/doc
-@(require unstable/scribble
+@(require planet/scribble
           scribble/manual
           (for-label racket
                      (only-in srfi/19
@@ -9,7 +9,7 @@
 @title{MongoDB}
 @author{@(author+email "Jay McCarthy" "jay@racket-lang.org")}
 
-@defmodule/this-package[]
+@defmodule/this-package[main]
 
 This package provides an interface to @link["http://www.mongodb.org/"]{MongoDB}. It supports and exposes features of MongoDB 1.3, if you use it with an older version they may silently fail.
 
