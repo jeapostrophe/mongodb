@@ -81,7 +81,9 @@
   (and (sequence? s)
        (not (or (string? s)
                 (bson-dict? s)
-                (bytes? s)))))
+                (bytes? s)
+                (int32? s)
+                (int64? s)))))
 
 (define-mappings/pred (byte->tag tag->byte value->tag)
   "Invalid BSON value: ~e"
@@ -89,7 +91,6 @@
   [(#x01) 'floating-point (and-pred real? inexact?)]
   [(#x02) 'utf8-string string?]
   [(#x03) 'document bson-dict?]
-  [(#x04) 'array bson-sequence?]
   [(#x05) 'binary (or-pred bytes? bson-binary?)]
   [(#x06) 'undefined deprecated] ; Deprecated
   [(#x07) 'objectid bson-objectid?]
@@ -105,7 +106,9 @@
   [(#x11) 'timestamp bson-timestamp?]
   [(#x12) 'int64 int64?]
   [(#xFF) 'min-key bson-min-key?]
-  [(#x7F) 'max-key bson-max-key?])
+  [(#x7F) 'max-key bson-max-key?]
+  ;; moved down so it doesn't suck up other things:  
+  [(#x04) 'array bson-sequence?])
 
 (define symbol->number 
   (compose string->number symbol->string))
