@@ -196,8 +196,9 @@
        (cons (hash-ref e 'name) (hash-ref e 'key))))
     =>
     (list (cons "((i . 1))" (make-hasheq (list (cons 'i 1)))))
-    
-    )
-   
-   
-   ))
+
+    ;; Track 413
+    (mongo-collection-find c
+                             (hasheq '_id (string->bson-objectid "test")))
+    =error>
+    "invalid object id")))

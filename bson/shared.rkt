@@ -59,7 +59,10 @@
   (integer-bytes->integer (bson-objectid-v v) #t #t 0 4))
 (require net/base64)
 (define (string->bson-objectid s)
-  (make-bson-objectid (base64-decode (string->bytes/utf-8 s))))
+  (define b (base64-decode (string->bytes/utf-8 s)))
+  (if (= 12 (bytes-length b))
+    (make-bson-objectid b)
+    (error 'string->bson-objectid "invalid object id, does not base64-decode to 12 bytes: ~e -> ~e" s b)))
 (define (bson-objectid->string b)
   (bytes->string/utf-8 (base64-encode (bson-objectid-v b))))
 
