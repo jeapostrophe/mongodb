@@ -3,7 +3,6 @@
                      syntax/parse
                      racket/list
                      syntax/stx
-                     unstable/syntax
                      racket/syntax)
          "dict.rkt")
 
