@@ -1,6 +1,5 @@
 #lang racket/base
-(require unstable/contract
-         racket/tcp
+(require racket/tcp
          racket/match
          racket/local
          racket/contract
