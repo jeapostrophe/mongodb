@@ -3,7 +3,7 @@
          racket/match
          racket/list
          racket/port
-         unstable/contract
+         (only-in racket/tcp port-number?)
          db/mongodb/wire/main
          net/bson
          net/bson/driver
