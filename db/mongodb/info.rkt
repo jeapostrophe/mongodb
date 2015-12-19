@@ -1,3 +1,3 @@
 #lang setup/infotab
 (define name "MongoDB")
-(define scribblings '(("mongodb.scrbl" (multi-page))))
+(define scribblings '(("mongodb.scrbl" (multi-page) ("Database"))))
