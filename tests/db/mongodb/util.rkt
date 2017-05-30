@@ -9,6 +9,7 @@
 
 (define-runtime-path test-dir "../test.db")
 
+(define mongod-p (find-executable-path "mongod"))
 (define (with-mongod* thnk)
   (define dbpath 
     test-dir
@@ -20,7 +21,7 @@
      (define-values (the-sp stdout stdin stderr)
        (subprocess (current-output-port) #f (current-error-port)
                    ;; #f #f #f
-                   (find-executable-path "mongod")
+                   mongod-p
                    ;; "-v"
                    "--quiet"
                    "--nojournal"
@@ -35,4 +36,4 @@
      (subprocess-kill sp #t)
      (delete-directory/files dbpath))))
 
-(provide with-mongod)
+(provide mongod-p with-mongod)
