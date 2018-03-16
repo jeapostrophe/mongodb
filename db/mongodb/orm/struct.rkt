@@ -46,6 +46,7 @@
                                    stx
                                  [#:required #f]
                                  [#:immutable #f]
+                                 [#:ref #f]
                                  [_ #t]))
                              opts))
                    (define ref-opts

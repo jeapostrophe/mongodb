@@ -161,9 +161,19 @@
       (make-cons) =error> "require"
       (make-cons #:cdr 1) =error> "require"))
 
-    (local
+     (local
      [(define-mongo-struct cons "cons"
         ([car #:immutable]
+         [cdr]))]
+     (test
+      (make-cons #:car 1)
+      (make-cons) =error> "require"
+      (make-cons #:cdr 1) =error> "require"
+      (set-cons-car! (make-cons #:car 1) 2) =error> "unbound"))
+
+     (local
+     [(define-mongo-struct cons "cons"
+        ([car #:immutable #:ref]
          [cdr]))]
      (test
       (make-cons #:car 1)
