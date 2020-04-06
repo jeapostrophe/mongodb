@@ -177,7 +177,7 @@
 (provide/contract
  [mongo-db-collections (mongo-db? . -> . (listof string?))])
 (define (mongo-db-collections db)
-  (let ([collections (mongo-db-collections db (list
+  (let ([collections (mongo-db-execute-command! db (list
                                                (cons 'listCollections 1)
                                                (cons 'filter null)
                                                (cons 'nameOnly #t)
