@@ -177,18 +177,20 @@
 (provide/contract
  [mongo-db-collections (mongo-db? . -> . (listof string?))])
 (define (mongo-db-collections db)
-  (define name (mongo-db-name db))
-  (define ans (mongo-find (mongo-db-mongo db) (format "~a.system.namespaces" name) empty))
-  (define name-rx (regexp (format "^~a\\.(.+)$" (regexp-quote name))))
-  (for/fold ([l empty])
-    ([c ans])
-    (define n (hash-ref c 'name))
-    (match (regexp-match name-rx n)
-      [(list _ name)
-       (if (regexp-match #rx"\\$" name)
-           l
-           (list* name l))]
-      [#f l])))
+  (let ([collections (mongo-db-collections db (list
+                                               (cons 'listCollections 1)
+                                               (cons 'filter null)
+                                               (cons 'nameOnly #t)
+                                               (cons 'authorizedCollections #t)))])
+    (cond
+      [(empty? collections) '()]
+      [else (let ([cursor (hash-ref collections 'cursor)])
+              (let ([firstBatch (hash-ref cursor 'firstBatch)])
+                (for/list ([c (in-vector firstBatch)])
+                  (let ([colname (hash-ref c 'name)])
+                    (cond
+                      [(symbol? colname) (symbol->string colname)]
+                      [else colname])))))])))
 
 (provide/contract
  [mongo-db-create-collection! ((mongo-db? string? #:capped? boolean? #:size number?)
