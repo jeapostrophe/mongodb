@@ -14,7 +14,7 @@
          ...))
      (with-syntax*
       ([make-struct
-        (format-id stx "make-~a" #'struct)]
+        (format-id #'struct "make-~a" #'struct)]
        [((required? opt ...) ...)
         (stx-map (lambda (opts-stx)
                    (define opts (syntax->list opts-stx))
